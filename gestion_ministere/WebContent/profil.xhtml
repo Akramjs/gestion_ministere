@@ -1,0 +1,132 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">إدخل الملفات الشخصية</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic"
+			style="margin-bottom: 20px;
+margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+			<h2>
+				<h:outputText value="إدخل الملفات الشخصية"
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Prise en charge des profils "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form dir="LTR">
+			<p:commandButton image="ui-icon ui-icon-plus" value="ajouter"
+				oncomplete="add.show();" />
+			<p />
+			<p:dataTable value="#{profilManagedBean.listProfils}"
+				var="f" rows="5" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Code profil">
+					<h:outputText value="#{f.codeProfil}" />
+				</p:column>
+				<p:column headerText="Profil">
+					<h:outputText value="#{f.nomUtilisateur} #{f.libelleProfil}" />
+				</p:column>
+				<p:column headerText="ملف الشخصي">
+					<h:outputText value="#{f.profil.alibelleProfil}" />
+				</p:column>
+				
+				<p:column headerText="action">
+					<p:commandButton image="ui-ion ui-icon-pencil" title="edit" />
+					<p:commandButton image="ui-ion ui-icon-close" title="supprimer"
+						onclick="if(!confirm('ÃŠtes-vous sÃ»re de vouloire supprimer !')) return false;"
+						action="#{profilsManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{ProfilManagedBean.selectedProfil}"
+							value="#{f}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<h:form>
+			<p:dialog widgetVar="add" header="Ø¥Ø¯Ø®Ø§Ù„ Ù…Ù„Ù� Ø¬Ø¯ÙŠØ¯"  width="400" height="300">
+				<h:panelGrid columns="2" id="pnl" cellspacing="15">
+					<h:outputLabel value="Code profil" />
+					<p:inputText
+						value="#{ProfilManagedBean.newProfil.codeProfil}"required="true"/>
+					<h:outputLabel value="Profil" />
+					<p:inputText
+						value="#{profilManagedBean.newProfil.libelleProfil}" required="true"/>
+					<h:outputLabel value="ملف الشخصي" />
+					<p:inputText
+						value="#{profilManagedBean.newProfil.alibelleProfil}" required="true" />
+					
+					<p:commandButton value="enregistrer" update="pnl growl"
+						actionListener="#{ProfilManagedBean.add()}" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">Ø¥Ø¯Ø®Ù„ Ø§Ù„Ù…Ù„Ù�Ø§Øª Ø§Ù„Ø´Ø®ØµÙŠØ©</ui:define>
+	<ui:define name="corps">
+
+		<p:growl id="growl" />
+		<h:form dir="LTR">
+			<p:commandButton image="ui-icon ui-icon-plus" value="ajouter"
+				oncomplete="add.show();" />
+			<p />
+			<p:dataTable value="#{profilManagedBean.listProfils}"
+				var="f" rows="5" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Code profil">
+					<h:outputText value="#{f.codeProfil}" />
+				</p:column>
+				<p:column headerText="Profil">
+					<h:outputText value="#{f.nomUtilisateur} #{f.libelleProfil}" />
+				</p:column>
+				<p:column headerText="Ù…Ù„Ù� Ø§Ù„Ø´Ø®ØµÙŠ">
+					<h:outputText value="#{f.profil.alibelleProfil}" />
+				</p:column>
+				
+				<p:column headerText="action">
+					<p:commandButton image="ui-ion ui-icon-pencil" title="edit" />
+					<p:commandButton image="ui-ion ui-icon-close" title="supprimer"
+						onclick="if(!confirm('ÃƒÅ tes-vous sÃƒÂ»re de vouloire supprimer !')) return false;"
+						action="#{profilsManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{ProfilManagedBean.selectedProfil}"
+							value="#{f}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<h:form>
+			<p:dialog widgetVar="add" header="Ã˜Â¥Ã˜Â¯Ã˜Â®Ã˜Â§Ã™â€ž Ã™â€¦Ã™â€žÃ™ï¿½ Ã˜Â¬Ã˜Â¯Ã™Å Ã˜Â¯"  width="400" height="300">
+				<h:panelGrid columns="2" id="pnl" cellspacing="15">
+					<h:outputLabel value="Code profil" />
+					<p:inputText
+						value="#{ProfilManagedBean.newProfil.codeProfil}" />
+					<h:outputLabel value="Profil" />
+					<p:inputText
+						value="#{profilManagedBean.newProfil.libelleProfil}" />
+					<h:outputLabel value="Ù…Ù„Ù� Ø§Ù„Ø´Ø®ØµÙŠ" />
+					<p:inputText
+						value="#{profilManagedBean.newProfil.alibelleProfil}" />
+					
+					<p:commandButton value="enregistrer" update="pnl growl"
+						actionListener="#{ProfilManagedBean.add()}" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

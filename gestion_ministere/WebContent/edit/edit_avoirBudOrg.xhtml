@@ -1,0 +1,38 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="/template.xhtml">
+	<ui:define name="titre">تحيين الاعتمادات الأولية السنوية</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic" style="margin-bottom: 20px;margin-left: 332px;margin-right: 237px;text-align: center;">
+			<h2>
+				<h:outputText value="  تحيين الاعتمادات الأولية السنوية"
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Mise à jour des budjets "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form>
+			<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="code Org." />
+					<p:inputText
+						value="#{avoirBudOrgManagedBean.selectedAvoirBudorg.id.codeOrg}" />
+					<h:outputLabel value="Organisme" />
+					<p:inputText
+						value="#{avoirBudOrgManagedBean.selectedAvoirBudorg.organisme.libelleOrg}" />
+					<h:outputLabel value="Annee" />
+					<p:inputText
+						value="#{avoirBudOrgManagedBean.selectedAvoirBudorg.id.annee}" />
+					<p:commandButton value="enregistrer" update="pnl growl"
+						actionListener="#{categorieManagedBean.update()}" />
+				</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

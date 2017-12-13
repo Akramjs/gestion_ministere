@@ -1,0 +1,111 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">إدخال المعطيات الخاصة بالمأمورية</ui:define>
+	<ui:define name="corps">
+		<style>
+.noussa td {
+	float: right;
+}
+
+.noussa tr {
+	margin-top: 20px;
+	display: flex;
+}
+</style>
+
+
+		<h:form style="text-align: center;" dir="RTL">
+			<p:growl id="growl" life="2000" />
+
+			<p:panel id="basic"
+				style="margin-bottom: 20px; margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+				<h2>
+					<h:outputText value="إدخال المعطيات الخاصة بالمأمورية"
+						style="color:rgba(17, 164, 189, 1);" />
+					<br></br>
+					<h:outputText
+						value="Prise en charge des bénéficiaires des données de la mission "
+						style="color: rgba(17, 164, 189, 1);text-align:center;" />
+				</h2>
+			</p:panel>
+
+			<p:panel id="basic1" style="overflow: hidden;">
+				<h:panelGrid style="margin: auto; text-align:center;" columns="6"
+					class="noussa">
+					<div style="float: left; margin-right: 262px;">
+						<h:outputText></h:outputText>
+						<h:outputText></h:outputText>
+
+
+						<h:outputText value=" رقم المأمورية " />
+						<p:inputText />
+						<h:outputText value=":Numéro de la mission" />
+					</div>
+					<h:outputText></h:outputText>
+
+					<h:outputText></h:outputText>
+
+					<p:selectOneMenu value="#{missionsManagedBean.theme.codeTheme}"
+						style="width : 600px;margin-right: 50px;
+							">
+						<f:selectItems value="#{missionsManagedBean.themes}" var="t"
+							itemLabel="#{t.codeTheme} #{t.libelleTheme} #{t.alibelleTheme} "
+							itemValue="" />
+
+					</p:selectOneMenu>
+					<h:outputText value=":Theme de la mission" />
+
+					<h:outputText></h:outputText>
+
+
+
+
+					<h:outputText value=" موضوع المأمورية  "
+						style="width:400px;float: left;" />
+					<h:outputText></h:outputText>
+
+					<h:outputText></h:outputText>
+					<h:outputText></h:outputText>
+					<h:outputText></h:outputText>
+					<h:outputText value=" Objet de la mission "
+						style="width:450px;float: left;" />
+					<p:inputTextarea rows="10" cols="50" queryDelay="750"
+						minQueryLength="4" />
+					<h:outputText></h:outputText>
+
+					<h:outputText></h:outputText>
+					<h:outputText></h:outputText>
+					<h:outputText></h:outputText>
+
+					<p:inputTextarea rows="10" cols="50" queryDelay="750"
+						minQueryLength="4" style="float: left;" />
+
+					<h:outputText value="تاريخ الذهاب  " style="margin-right: 100px;" />
+					<p:calendar
+						value="#{missionnaireManagedBean.missionnaire.dateLivCinMissionnaire}"
+						pattern="yyyy-MM-dd"></p:calendar>
+					<h:outputText value="تاريخ الإياب " />
+					<p:calendar
+						value="#{missionnaireManagedBean.missionnaire.dateLivCinMissionnaire}"
+						pattern="yyyy-MM-dd"></p:calendar>
+					<h:outputText value="المدة  " />
+					<p:inputText />
+
+				</h:panelGrid>	
+				
+				
+					 <p:commandButton value="تسجيل" id="withIcon"
+					actionListener="#{missionnaireManagedBean.add}" update="growl"
+					icon="ui-icon-disk"
+					style="width:200px;margin: 17px 0px 0px 26px;height: 40px;
+float: left;" />
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>

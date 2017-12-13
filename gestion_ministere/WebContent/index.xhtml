@@ -1,0 +1,110 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<f:view contentType="text/html">
+	<h:head>
+		<f:facet name="first">
+			<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+		</f:facet>
+		<title>التعريف بالمستعملين</title>
+
+		<style type="text/css">
+.wijmo-wijmenu .wijmo-wijmenu-list .wijmo-wijmenu-item {
+	float: right;
+	color: black;
+}
+
+.ui-widget {
+	font-size: 75%;
+}
+
+.ui-layout-north {
+	z-index: 20 !important;
+	overflow: visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
+}
+
+.ui-state-default a,.ui-state-default a:link,.ui-state-default a:visited
+	{
+	color: #22222222;
+	text-decoration: none;
+}
+
+.wijmo-wijmenu .wijmo-wijmenu-item .wijmo-wijmenu-text,.wijmo-wijmenu-horizontal .wijmo-wijmenu-parent .ui-icon,.wijmo-wijmenu-breadcrumb a,.wijmo-wijmenu-breadcrumb span,.wijmo-wijmenu-breadcrumb .wijmo-wijmenu-prev-list a .ui-icon
+	{
+	color: black;
+}
+</style>
+	</h:head>
+
+
+	<h:body dir="RTL" onload="loginDlg.show();">
+
+		<p:growl id="growl" showDetail="true" />
+		<p:dialog widgetVar="loginDlg" header="التعريف بالمستعملين"
+			closable="false" width="400" modal="true" position="center">
+			<h:form prependId="false">
+				<h:panelGrid id="logPanel" columns="2">
+					<h:outputLabel value="رقم بطاقة التعريف الوطنية" />
+					<p:inputText required="true" id="cin"
+						value="#{loginManagedBean.connctedUser.cinUtilisateur}"
+						requiredMessage="رقم بطاقة التعريف الوطنية إجباري">
+						<f:validateRegex pattern="([0-9]+)" for="cin" />
+						<f:validateLength maximum="8" minimum="8" />
+						<p:ajax event="blur" listener="#{loginManagedBean.getUserName()}"
+							update="logPanel growl" />
+					</p:inputText>
+					<h:outputLabel value="الإسم و اللقب" />
+					<p:inputText required="true" requiredMessage="الإسم و اللقب إجباري"
+						readonly="true"
+						value="#{loginManagedBean.connctedUser.anomUtilisateur}" />
+					<h:outputLabel value="كلمة العبور" />
+					<p:inputText type="password" required="true"
+						requiredMessage="كلمة العبور إجباري"
+						value="#{loginManagedBean.psw}" />
+
+					<p:commandButton value="دخول" update="growl"
+						actionListener="#{loginManagedBean.connect()}"
+						image="ui-icon ui-icon-unlocked" />
+
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+		<p:layout fullPage="true">
+
+			<p:layoutUnit id="top" position="north" size="150">
+				<center>
+					<p:graphicImage url="images/banniere_finale.jpg" height="100"
+						style="width: 100%;" />
+				</center>
+
+			</p:layoutUnit>
+
+			<p:layoutUnit id="bottom" position="south" size="35"
+				header="الحقوق محفوظة">
+
+			</p:layoutUnit>
+
+
+			<p:layoutUnit id="center" position="center">
+
+
+			</p:layoutUnit>
+
+		</p:layout>
+
+
+	</h:body>
+
+</f:view>
+</html>

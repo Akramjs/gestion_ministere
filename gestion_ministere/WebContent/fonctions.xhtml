@@ -1,0 +1,112 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">تثبيت الخطط الوظيفية</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic"
+			style="margin-bottom: 20px;
+margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+			<h2>
+				<h:outputText value="تثبيت الخطط الوظيفية"
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Prise en charge des fonctions "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form dir="ltr">
+			<p:commandButton image="ui-icon ui-icon-plus" value="ajouter"
+				oncomplete="add.show();" />
+			<p />
+			<p:dataTable value="#{fonctionManagedBean.listFonctions}" var="f"
+				rows="5" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Code">
+					<h:outputText value="#{f.codeFonction}" />
+				</p:column>
+				<p:column headerText="Fonction">
+					<h:outputText value="#{f.libelleFonction}" />
+				</p:column>
+				<p:column headerText="الخطة الوظيفية">
+					<h:outputText value="#{f.alibelleFonction}" />
+				</p:column>
+				<p:column headerText="Responsable validation">
+					<h:outputText value="#{f.respValidationFonc}" />
+				</p:column>
+				<p:column headerText="المسؤول">
+					<h:outputText value="#{f.arespValidationFonc}" />
+				</p:column>
+				
+				<p:column style="width: 8%">
+					<p:commandLink immediate="true" title="edit" action="#{fonctionManagedBean.goToEdit()}">
+						<f:setPropertyActionListener
+							target="#{fonctionManagedBean.selectedFonction}" value="#{f}" />
+
+						<p:graphicImage value="/images/document_edit.png" width="15"
+							height="15" />
+					</p:commandLink><p:spacer width="10px" height="0px" />
+					<p:commandLink immediate="true" title="delete"
+						onclick="if(!confirm('Êtes-vous sûre de vouloire supprimer !')) return false;"
+						action="#{fonctionManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{fonctionManagedBean.selectedFonction}" value="#{f}" />
+					<p:graphicImage value="/images/remove.png" width="15" height="15" />
+					</p:commandLink>
+
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<h:form>
+			<p:dialog widgetVar="add" header="خطة وظيفية جديدة">
+				<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="code" />
+					<p:inputText required="true" requiredMessage="code obligatoire"
+						value="#{fonctionManagedBean.newFonction.codeFonction}" id="code">
+						<f:validateLength maximum="20" minimum="1" />
+
+						<f:validateRegex pattern="([0-9A-Z]+)" for="code" />
+					</p:inputText>
+					<h:outputLabel value="Fonction" />
+					<p:inputText required="true" requiredMessage="Fonction obligatoire"
+						value="#{fonctionManagedBean.newFonction.libelleFonction}" id="fn">
+						<f:validateLength maximum="10" minimum="1" />
+						<f:validateRegex pattern="([a-zA-Z]+)" for="fn" />
+
+					</p:inputText>
+					<h:outputLabel value="الخطة الوظيفية" />
+					<p:inputText required="true"
+						requiredMessage="الخطة الوظيفية إجباري"
+						value="#{fonctionManagedBean.newFonction.alibelleFonction}">
+						<f:validateLength maximum="20" minimum="1" />
+
+					</p:inputText>
+					<h:outputLabel value="Responsable validation" />
+					<p:inputText
+						value="#{fonctionManagedBean.newFonction.respValidationFonc}"
+						required="true" id="res">
+						<f:validateLength maximum="20" minimum="1" />
+						<f:validateRegex pattern="([a-zA-Z]+)" for="res" />
+
+					</p:inputText>
+					<h:outputLabel value="المسؤول" />
+					<p:inputText
+						value="#{fonctionManagedBean.newFonction.arespValidationFonc}"
+						required="true">
+						<f:validateLength maximum="20" minimum="1" />
+					</p:inputText>
+
+					<p:commandButton value="enregistrer" update="pnl growl"
+						actionListener="#{fonctionManagedBean.add()}" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

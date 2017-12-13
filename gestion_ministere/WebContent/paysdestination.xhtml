@@ -1,0 +1,105 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">تثبيت البلدان المقصودة</ui:define>
+	<ui:define name="corps">
+<p:panel id="basic"
+				style="margin-bottom: 20px;
+margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+				<h2>
+					<h:outputText value="تثبيت البلدان المقصودة"
+						style="color:rgba(17, 164, 189, 1);" />
+					<br></br>
+					<h:outputText
+						value="Prise en charge des pays de destination "
+						style="color: rgba(17, 164, 189, 1);text-align:center;" />
+				</h2>
+			</p:panel>
+		<p:growl id="growl" />
+		<h:form dir="ltr">
+			<p:commandButton image="ui-icon ui-icon-plus" value="إظافة بلد جديد"
+				oncomplete="add.show();" />
+			<p />
+			<p:dataTable id="dat" value="#{paysDestinationManagedBean.paysDestinations}" var="p"
+				rows="5" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Zone">
+											<h:outputText value="#{p.zone.codeZone}" />
+						
+						
+					</p:column>
+				<p:column headerText="code">
+					<h:outputText value="#{p.codePaysDes}" />
+				</p:column>
+				<p:column headerText="Pays">
+					<h:outputText value="#{p.libellePaysDes}" />
+				</p:column>
+				<p:column headerText="البلد">
+					<h:outputText value="#{p.alibellePaysDes}" />
+				</p:column>
+				<p:column headerText="langue">
+					<h:outputText value="#{p.langue}" />
+				</p:column>
+				<p:column style="width: 8%">
+					
+					<p:commandLink immediate="true" title="edit"
+					action="#{paysDestinationManagedBean.goToEdit()}"	>
+						<f:setPropertyActionListener
+							target="#{paysDestinationManagedBean.selectedPaysDestination}" value="#{p}" />
+		
+						<p:graphicImage value="/images/document_edit.png" width="15" 
+							height="15" />
+					</p:commandLink><p:spacer width="15px" height="0px"/>
+					<p:commandLink immediate="true" title="delete"
+						onclick="if(!confirm('Êtes-vous sûre de vouloire supprimer !')) return false;"
+						action="#{paysDestinationManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{paysDestinationManagedBean.selectedPaysDestination}" value="#{p}" />
+		
+						<p:graphicImage value="/images/remove.png" width="15"
+							height="15" />
+					</p:commandLink>
+					
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<h:form>
+			<p:dialog widgetVar="add" header="Ø®Ø·Ø· ÙˆØ¸ÙŠÙ�ÙŠØ© Ø¬Ø¯ÙŠØ¯Ø©">
+				<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="zone" />
+					<p:selectOneMenu
+							value="#{paysDestinationManagedBean.zone.codeZone}"
+							style="width : 250px;">
+														<f:selectItem itemLabel="" itemValue=""/>
+							
+							<f:selectItems value="#{paysDestinationManagedBean.zones}" var="z"
+								itemLabel="#{z.codeZone} #{z.libelleZone} #{z.alibelleZone}"
+								itemValue="#{z.codeZone}" />
+								</p:selectOneMenu>
+					<h:outputLabel value="code" />
+					<p:inputText
+						value="#{paysDestinationManagedBean.paysDestination.codePaysDes}" />
+					<h:outputLabel value="Pays" />
+					<p:inputText
+						value="#{paysDestinationManagedBean.paysDestination.libellePaysDes}" />
+					<h:outputLabel value="البلد" />
+					<p:inputText
+						value="#{paysDestinationManagedBean.paysDestination.alibellePaysDes}" />
+					<h:outputLabel value="langue" />
+					<p:inputText
+						value="#{paysDestinationManagedBean.paysDestination.langue}" />
+
+					<p:commandButton value="ØªØ³Ø¬ÙŠÙ„" update="pnl growl"
+						actionListener="#{paysDestinationManagedBean.add()}" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

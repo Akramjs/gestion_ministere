@@ -1,0 +1,58 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="/template.xhtml">
+	<ui:define name="titre">تحيين الملف الشخصي للمستعملين</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic"
+			style="margin-bottom: 20px;margin-left: 332px;margin-right: 237px;text-align: center;">
+
+			<h2>
+				<h:outputText value="تحيين الملف الشخصي للمستعملين "
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Mise à jour des Profils "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form>
+			<h:panelGrid columns="2" id="pnl" cellspacing="15">
+					<h:outputLabel value="CIN" />
+					<p:inputText readonly="true"
+						value="#{utilisateursManagedBean.selectedUtilisateur.cinUtilisateur} " id="cin" required="true" requiredMessage="CINobligatoire" >
+						<f:validateLength maximum="8" minimum="8" />
+																					<f:validateRegex pattern="([0-9]+)" for="cin" />
+																					</p:inputText>
+									
+					<h:outputLabel value="Nom" />
+					<p:inputText
+						value="#{utilisateursManagedBean.selectedUtilisateur.nomUtilisateur}" required="true" id="nom" >
+												<f:validateRegex pattern="([a-zA-Z]+)" for="nom" />
+												<f:validateLength maximum="10" minimum="1" />
+												</p:inputText>
+					<h:outputLabel value="Prénom" />
+					<p:inputText
+						value="#{utilisateursManagedBean.selectedUtilisateur.prenomUtilisateur}" required="true">
+																		<f:validateLength maximum="10" minimum="1" />																																											
+																		
+						</p:inputText>
+					<h:outputLabel value="Profil" />
+					<p:selectOneMenu required="true" requiredMessage="Profil obligatoire"
+						value="#{utilisateursManagedBean.selectedUtilisateur.profil.codeProfil}">
+						<f:selectItem itemLabel="" itemValue="" />
+						<f:selectItems value="#{utilisateursManagedBean.listProfils}"
+							var="p" itemLabel="#{p.codeProfil} #{p.libelleProfil}"
+							itemValue="#{p.codeProfil}" />
+					</p:selectOneMenu>
+					<p:commandButton value="enregistrer" update="pnl growl"
+						actionListener="#{utilisateursManagedBean.update()}" />
+				</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

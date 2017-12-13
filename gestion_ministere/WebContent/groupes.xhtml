@@ -1,0 +1,96 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">تثبيت المجموعات</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic"
+			style="margin-bottom: 20px;
+margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+			<h2>
+				<h:outputText value="تثبيت المجموعات "
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Prise en charge des groupes "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form dir="ltr">
+			<p:commandButton image="ui-icon ui-icon-plus" value="ajouter"
+				oncomplete="add.show();" />
+			<p />
+			<p:dataTable value="#{groupeManagedBean.listGroupes}" var="f"
+				paginator="true" paginatorPosition="bottom" rows="5">
+				<p:column headerText="Code">
+					<h:outputText value="#{f.codeGroupe}" id="code">
+
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Groupe">
+					<h:outputText value="#{f.libelleGroupe}" />
+
+				</p:column>
+				<p:column headerText="المجموعة">
+					<h:outputText value="#{f.alibelleGroupe}" />
+
+				</p:column>
+				<p:column style="width: 8%">
+					<p:commandLink action="#{groupeManagedBean.goToEdit()}"
+						immediate="true" title="edit">
+						<f:setPropertyActionListener
+							target="#{groupeManagedBean.selectedGroupe}" value="#{f}"></f:setPropertyActionListener>
+						<p:graphicImage value="/images/document_edit.png" width="15"
+							height="15" />
+					</p:commandLink>
+					<p:spacer width="10px" height="0ox" />
+					<p:commandLink immediate="true" 
+						title="supprimer"
+						onclick="if(!confirm('Êtes-vous sûre de vouloire supprimer !')) return false;"
+						action="#{groupeManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{groupeManagedBean.selectedGroupe}" value="#{f}"></f:setPropertyActionListener>
+					
+						<p:graphicImage value="/images/remove.png" width="15" height="15" />
+					</p:commandLink>
+
+				</p:column>
+				
+			</p:dataTable>
+		</h:form>
+		<h:form>
+			<p:dialog widgetVar="add" header="مجموعة جديدة">
+				<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="code" />
+					<p:inputText value="#{groupeManagedBean.newGroupe.codeGroupe}"
+						id="code" required="true" requiredMessage="code obligatoire">
+						<f:validateLength maximum="1" minimum="1" />
+
+						<f:validateRegex pattern="([A-Z]+)" for="code" />
+					</p:inputText>
+
+					<h:outputLabel value="Groupe" />
+					<p:inputText value="#{groupeManagedBean.newGroupe.libelleGroupe}"
+						id="gr" required="true" requiredMessage="groupe obligatoire">
+						<f:validateLength maximum="10" minimum="1" />
+						<f:validateRegex pattern="([a-zA-Z]+)" for="gr" />
+					</p:inputText>
+					<h:outputLabel value="المجموعة" />
+					<p:inputText value="#{groupeManagedBean.newGroupe.alibelleGroupe}"
+						required="true" requiredMessage="المجموعة">
+						<f:validateLength maximum="10" minimum="1" />
+					</p:inputText>
+					<p:commandButton value="enregistrer" update="pnl growl"
+						actionListener="#{groupeManagedBean.add()}" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

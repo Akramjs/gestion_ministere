@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="/template.xhtml">
+	<ui:define name="titre">تثبيت الخطط الوظيفية</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic" style="margin-bottom: 20px;margin-left: 332px;margin-right: 237px;text-align: center;">
+			<h2>
+				<h:outputText value="تحيين الخطط الوظيفية"
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Mise à jour des fonctions "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form>
+			<h:panelGrid columns="2" id="pnl">
+				<h:outputLabel value="code" />
+				<p:inputText
+					value="#{fonctionManagedBean.selectedFonction.codeFonction}" id="code" >
+					<f:validateLength maximum="2" minimum="1" />
+						
+							<f:validateRegex pattern="([0-9A-Z]+)" for="code" />
+							</p:inputText>
+				<h:outputLabel value="Fonction" />
+				<p:inputText
+					value="#{fonctionManagedBean.selectedFonction.libelleFonction}" id="fn" >
+					<f:validateLength maximum="10" minimum="1" />
+													<f:validateRegex pattern="([a-zA-Z]+)" for="fn" />
+						</p:inputText>
+				<h:outputLabel value="الخطة الوظيفية" />
+				<p:inputText
+					value="#{fonctionManagedBean.selectedFonction.alibelleFonction}">
+																	<f:validateLength maximum="10" minimum="1" />
+					</p:inputText>
+				<h:outputLabel value="Responsable validation" />
+				<p:inputText
+					value="#{fonctionManagedBean.selectedFonction.respValidationFonc}" id="res" >
+					<f:validateLength maximum="10" minimum="1" />
+																			<f:validateRegex pattern="([a-zA-Z]+)" for="res" />
+												</p:inputText>
+				<h:outputLabel value="المسؤول" />
+				<p:inputText
+					value="#{fonctionManagedBean.selectedFonction.arespValidationFonc}" >
+																	<f:validateLength maximum="10" minimum="1" />
+					</p:inputText>
+
+				<p:commandButton value="enregistrer" update="pnl growl"
+					actionListener="#{fonctionManagedBean.update()}" />
+			</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

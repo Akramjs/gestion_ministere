@@ -1,0 +1,32 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">Ø¥Ø¹Ø¯Ø§Ø¯ Ø§Ù„Ù…Ø£Ù…ÙˆØ±ÙŠØ§Øª</ui:define>
+	<ui:define name="corps">
+
+		<h:form>
+			<div align="center">
+				<h:panelGrid columns="1" cellspacing="20">
+					<p:commandButton style="font-size:200%;width:400px;"
+												oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/missionnaire.xhtml'"
+						
+						image="ui-icon ui-icon-pencil" value="إدخال المنتفعين بالمأمورية" />
+						<p:commandButton style="font-size:200%;width:400px;"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/missions.xhtml'"
+						
+						image="ui-icon ui-icon-pencil" value="إدخال المعطيات الخاصة بالمأمورية" />
+						<p:commandButton style="font-size:200%;width:400px;"
+												oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/missions.xhtml'"
+						
+						image="ui-icon ui-icon-check" value="مصادقة الآمر بالصرف" />
+						
+					</h:panelGrid>
+			</div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

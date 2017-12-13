@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="/template.xhtml">
+	<ui:define name="titre">تثبيت الرتب</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic"
+			style="margin-bottom: 20px;
+margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+			<h2>
+				<h:outputText value="تحيين الرتب"
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Mise à jour des grades "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form>
+			<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="code" />
+					<p:inputText value="#{gradeManagedBean.selectedGrade.codeGrade}"
+						required="true" requiredMessage="code obligatoire" id="code">
+						<f:validateLength minimum="1" />
+						<f:validateRegex pattern="([0-9]+)" for="code" />
+					</p:inputText>
+					<h:outputLabel value="Grade" />
+					<p:inputText value="#{gradeManagedBean.selectedGrade.libelleGrade}"
+						id="gra" required="true" requiredMessage="Grade obligatoire">
+						<f:validateLength maximum="25" minimum="1" />
+						<f:validateRegex pattern="([a-zA-Z]+)" for="gra" />
+					</p:inputText>
+					<h:outputLabel value="الرتبة" />
+					<p:inputText value="#{gradeManagedBean.selectedGrade.alibelleGrade}"
+						required="true" requiredMessage="الرتبة obligatoire">
+
+					</p:inputText>
+
+				<p:commandButton value="enregistrer" update="pnl growl"
+					actionListener="#{fonctionManagedBean.update()}" />
+			</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

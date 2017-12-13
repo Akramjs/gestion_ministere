@@ -1,0 +1,94 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">تثبيت المناطق</ui:define>
+	<ui:define name="corps">
+<p:panel id="basic"
+				style="margin-bottom: 20px;
+margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+				<h2>
+					<h:outputText value="تثبيت المناطق"
+						style="color:rgba(17, 164, 189, 1);" />
+					<br></br>
+					<h:outputText
+						value="Prise en charge des Zones "
+						style="color: rgba(17, 164, 189, 1);text-align:center;" />
+				</h2>
+			</p:panel>
+		<p:growl id="growl" />
+		<h:form dir="ltr">
+			<p:commandButton image="ui-icon ui-icon-plus" value="إظافة منطقة جديدة"
+				oncomplete="add.show();" />
+			<p />
+			<p:dataTable value="#{zoneManagedBean.listZones}" var="z"
+				rows="5" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Code">
+					<h:outputText value="#{z.codeZone}" />
+				</p:column>
+				<p:column headerText="Zone">
+					<h:outputText value="#{z.libelleZone}" />
+				</p:column>
+				<p:column headerText="المنطقة">
+					<h:outputText value="#{z.alibelleZone}" />
+				</p:column>
+				<p:column style="width: 8%">
+					
+					<p:commandLink immediate="true" title="edit"
+					action="#{zoneManagedBean.goToEdit()}"	>
+						<f:setPropertyActionListener
+							target="#{zoneManagedBean.selectedZone}" value="#{z}" />
+		
+						<p:graphicImage value="/images/document_edit.png" width="15" 
+							height="15" />
+					</p:commandLink><p:spacer width="15px" height="0px"/>
+					<p:commandLink immediate="true" title="delete"
+						onclick="if(!confirm('Êtes-vous sûre de vouloire supprimer !')) return false;"
+						action="#{zoneManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{zoneManagedBean.selectedZone}" value="#{z}" />
+		
+						<p:graphicImage value="/images/remove.png" width="15"
+							height="15" />
+					</p:commandLink>
+					
+				</p:column>
+				<p:column headerText="action">
+					<p:commandButton image="ui-ion ui-icon-pencil" title="edit" />
+					<p:commandButton image="ui-ion ui-icon-close" title="supprimer"
+						onclick="if(!confirm('êtes-vous sûre de vouloire supprimer ?')) return false;"
+						action="#{zoneManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{zoneManagedBean.selectedZone}" value="#{z}" />
+					</p:commandButton>
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<h:form>
+			<p:dialog widgetVar="add" header="إظافة منطقة جديدة">
+				<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="code" />
+					<p:inputText
+						value="#{zoneManagedBean.newZone.codeZone}" />
+					<h:outputLabel value="Zone" />
+					<p:inputText
+						value="#{zoneManagedBean.newZone.libelleZone}" />
+					<h:outputLabel value="المنطقة" />
+					<p:inputText
+						value="#{zoneManagedBean.newZone.alibelleZone}" />
+					
+					
+					<p:commandButton value="تسجيل" update="pnl growl"
+						actionListener="#{zoneManagedBean.add()}" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

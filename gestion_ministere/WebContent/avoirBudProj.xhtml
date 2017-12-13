@@ -1,0 +1,113 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">إدخال اعتمادات المشاريع</ui:define>
+	<ui:define name="corps">
+
+		<p:growl id="growl" />
+		<h:form>
+			<div align="right" dir="rtl">
+				<h:panelGrid columns="3" id="pnl1" cellspacing="15">
+					<h:outputLabel value="في" />
+					<p:calendar value="#{avoirBudProjManagedBean.curDate}" />
+					<h:outputLabel value="Date :" />
+				</h:panelGrid>
+			</div>
+			<div align="center" dir="ltr">
+				<h:panelGrid columns="3" id="pnl" cellspacing="15">
+					<h:outputLabel value="  رمز المشروع " />
+					<h:outputLabel value="Nom Projet" />
+					<h:outputLabel value="إسم المشروع" />
+					<h:panelGroup>
+						<p:commandButton value="..." oncomplete="show.show()" />
+						<p:inputText
+							value="#{avoirBudProjManagedBean.selectedProjet.codeProj}" />
+					</h:panelGroup>
+					<p:inputText
+						value="#{avoirBudProjManagedBean.selectedProjet.nomProj}" />
+
+					<p:inputText
+						value="#{avoirBudProjManagedBean.selectedProjet.anomProj}" />
+				</h:panelGrid>
+
+			</div>
+			<p />
+			<p:commandButton image="ui-icon ui-icon-plus"
+				value="إضافة اعتماد للمشروع" oncomplete="add.show()" />
+			<p:dataTable
+				value="#{avoirBudProjManagedBean.selectedProjet.avoirBudprojs}"
+				var="f" rows="5" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Num Ordre">
+					<h:outputText value="#{f.id.numeroOrdreBudProj}" />
+				</p:column>
+				<p:column headerText="Montant">
+					<h:outputText value="#{f.montant}" />
+				</p:column>
+				<p:column headerText="Référence">
+					<h:outputText value="#{f.reference}" />
+				</p:column>
+				<p:column headerText="المرجع">
+					<h:outputText value="#{f.areference}" />
+				</p:column>
+
+
+			</p:dataTable>
+			<div align="center" style="margin-top: 60px; font-weight: bold;">
+				<h:panelGrid columns="3">
+					<h:outputLabel value="مجموع اعتمادات " />
+					<p:inputText value="#{avoirBudProjManagedBean.sum}" />
+					<h:outputLabel value="Somme des montants" />
+				</h:panelGrid>
+
+			</div>
+		</h:form>
+		<h:form prependId="false">
+			<p:dialog widgetVar="show" header="المشاريع" width="400" height="300">
+				<p:dataTable value="#{avoirBudProjManagedBean.listProjets}" var="pr"
+					paginator="true" paginatorPosition="bottom" rows="5">
+					<p:column headerText="Code Projet">
+						<h:outputText value="#{pr.codeProj}" />
+					</p:column>
+					<p:column headerText="Nom Projet">
+						<h:outputText value="#{pr.nomProj}" />
+					</p:column>
+					<p:column headerText="إسم المشروع">
+						<h:outputText value="#{pr.anomProj}" />
+					</p:column>
+					<p:column headerText="Code Projet">
+						<p:commandButton value="afficher" ajax="false"
+							action="#{avoirBudProjManagedBean.refresh}">
+							<f:setPropertyActionListener
+								target="#{avoirBudProjManagedBean.selectedProjet}" value="#{pr}"></f:setPropertyActionListener>
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</p:dialog>
+
+		</h:form>
+
+		<h:form prependId="false">
+			<p:dialog widgetVar="add" header="إدخال اعتماد للمشروع" width="400"
+				height="300">
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Montant" />
+					<p:inputText
+						value="#{avoirBudProjManagedBean.newAvoirBudProj.montant}" required="true" />
+					<h:outputLabel value="Référence" />
+					<p:inputText
+						value="#{avoirBudProjManagedBean.newAvoirBudProj.reference}" />
+					<h:outputLabel value="المرجع" />
+					<p:inputText
+						value="#{avoirBudProjManagedBean.newAvoirBudProj.areference}" />
+					<p:commandButton value="enregistrer" image="ui-icon ui-icon-check" actionListener="#{avoirBudProjManagedBean.add()}" />
+				</h:panelGrid>
+
+			</p:dialog>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

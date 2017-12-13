@@ -1,0 +1,39 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="/template.xhtml">
+	<ui:define name="titre">تثبيت أنواع الهياكل</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic" style="margin-bottom: 20px; margin-left: 332px; margin-right: 237px;text-align: center;">
+			<h2>
+				<h:outputText value="تثبيت أنواع الهياكل "
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Mise à jour des Types d'organismes "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form>
+			<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="code" />
+					<p:inputText
+						value="#{typeOrganismeManagedBean.selectedTypeOrganisme.codeTypeOrganisme}" required="true" />
+					<h:outputLabel value="Code Clé" />
+					<p:inputText
+						value="#{typeOrganismeManagedBean.selectedTypeOrganisme.codeCleTypeOrganisme}" required="true" />
+					<h:outputLabel value="Libelle" />
+					<p:inputText
+						value="#{typeOrganismeManagedBean.selectedTypeOrganisme.libelleTypeOrganisme}" required="true"/>
+					<h:outputLabel value="إسم نوع الهيكل" />
+					<p:inputText
+						value="#{typeOrganismeManagedBean.selectedTypeOrganisme.alibelleTypeOrganisme}" required="true"/>
+					<p:commandButton value="enregistrer" update="pnl"
+						action="#{typeOrganismeManagedBean.update()}" />
+				</h:panelGrid>
+		</h:form>
+		</ui:define>
+</ui:composition>
+

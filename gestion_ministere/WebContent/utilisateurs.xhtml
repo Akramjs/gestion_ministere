@@ -1,0 +1,103 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">إدخال الملف الشخصي للمستعملين</ui:define>
+	<ui:define name="corps">
+<p:panel id="basic"
+			style="margin-bottom: 20px;
+margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+			<h2>
+				<h:outputText value="إدخل الملف الشخصي للمستعملين"
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Prise en charge des utilisateurs "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form dir="ltr">
+			<p:commandButton image="ui-icon ui-icon-plus" value="ajouter"
+				oncomplete="add.show();" />
+			<p />
+			<p:dataTable value="#{utilisateursManagedBean.listUtilisateurs}"
+				var="f" rows="5" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="CIN utilisateur">
+					<h:outputText value="#{f.cinUtilisateur}" />
+				</p:column>
+				<p:column headerText="Nom et Prénom">
+					<h:outputText value="#{f.nomUtilisateur} #{f.prenomUtilisateur}" />
+				</p:column>
+				<p:column headerText="Code profil">
+					<h:outputText value="#{f.profil.libelleProfil}" />
+				</p:column>
+				<p:column headerText="الملف الشخصي">
+					<h:outputText value="#{f.profil.alibelleProfil}" />
+				</p:column>
+				<p:column style="width: 8%">
+				<p:commandLink immediate="true" title="edit"
+					action="#{utilisateursManagedBean.goToEdit()}"	>
+						<f:setPropertyActionListener
+							target="#{utilisateursManagedBean.selectedUtilisateur}"
+							value="#{f}" />
+						<p:graphicImage value="/images/document_edit.png" width="15" 
+							height="15" />
+					</p:commandLink><p:spacer width="15px" height="0px"/>
+					<p:commandLink immediate="true" title="delete"
+						onclick="if(!confirm('Êtes-vous sûre de vouloire supprimer !')) return false;"
+						action="#{utilisateursManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{utilisateursManagedBean.selectedUtilisateur}"
+							value="#{f}" />
+						<p:graphicImage value="/images/remove.png" width="15"
+							height="15" />
+					</p:commandLink>
+					
+				</p:column>
+				
+			</p:dataTable>
+		</h:form>
+		<h:form>
+			<p:dialog widgetVar="add" header="إدخال ملف جديد"  width="400" height="300">
+				<h:panelGrid columns="2" id="pnl" cellspacing="15">
+					<h:outputLabel value="CIN" />
+					<p:inputText
+						value="#{utilisateursManagedBean.newUtilisateur.cinUtilisateur} " id="cin" required="true" requiredMessage="CINobligatoire" >
+						<f:validateLength maximum="8" minimum="8" />
+																					<f:validateRegex pattern="([0-9]+)" for="cin" />
+																					</p:inputText>
+									
+					<h:outputLabel value="Nom" />
+					<p:inputText
+						value="#{utilisateursManagedBean.newUtilisateur.nomUtilisateur}" required="true" id="nom" >
+																											<f:validateRegex pattern="([a-zA-Z]+)" for="nom" />
+												</p:inputText>
+					<h:outputLabel value="Prénom" />
+					<p:inputText
+						value="#{utilisateursManagedBean.newUtilisateur.prenomUtilisateur}" required="true">
+																		<f:validateLength maximum="10" minimum="1" />
+																																													<f:validateRegex pattern="([a-zA-Z]+)" for="nom" />
+																		
+						</p:inputText>
+					<h:outputLabel value="Profil" />
+					<p:selectOneMenu required="true" requiredMessage="Profil obligatoire"
+						value="#{utilisateursManagedBean.newUtilisateur.profil.codeProfil}">
+						<f:selectItem itemLabel="" itemValue="" />
+						<f:selectItems value="#{utilisateursManagedBean.listProfils}"
+							var="p" itemLabel="#{p.codeProfil} #{p.libelleProfil}"
+							itemValue="#{p.codeProfil}" />
+					</p:selectOneMenu>
+					<p:commandButton value="enregistrer" update="pnl growl"
+						actionListener="#{utilisateursManagedBean.add()}" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

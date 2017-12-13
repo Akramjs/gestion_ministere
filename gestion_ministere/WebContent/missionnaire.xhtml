@@ -1,0 +1,173 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">إدخال المنتفعين بالمأمورية</ui:define>
+	<ui:define name="corps">
+		<h:form id="form" style="text-align: center;" dir="RTL">
+			<p:growl id="growl" life="2000" />
+
+			<p:panel id="basic"
+				style="margin-bottom: 40px;
+margin-left: 332px;
+margin-right: 237px;text-align:center;">
+
+				<h2>
+					<h:outputText value="إدخال المنتفعين بالمأمورية"
+						style="color:rgba(17, 164, 189, 1);" />
+					<br></br>
+					<h:outputText
+						value="Prise en charge des bénéficiaires des missions "
+						style="color: rgba(17, 164, 189, 1);text-align:center;" />
+				</h2>
+			</p:panel>
+
+			<p:panel id="basic1"
+				style="margin-bottom:20px; text-align:center;margin-top:10px;">
+				<h:panelGrid columns="6" style="margin: auto;margin-bottom: 5px;">
+					<h:outputText value="رقم الهوية "
+						style="margin-left:10px;margin-right:10px;" />
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.cinMissionnaire}" />
+					<h:outputText value=" المسلمة يوم "
+						style="margin-left:10px; margin-right:10px;" />
+
+
+					<p:calendar
+						value="#{missionnaireManagedBean.missionnaire.dateLivCinMissionnaire}" />
+					<h:outputText value="بـــــ"
+						style="margin-left:10px;margin-right:10px;" />
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.lieuLivCinMissionnaire}"
+						style="margin-left:134px;" />
+
+				</h:panelGrid>
+				<h:panelGrid columns="4" style="margin: auto; ">
+					<h:outputText value="الجنسية" />
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.anationaliteMissionnaire}"
+						style="width:250px;" />
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.nationaliteMissionnaire}"
+						style="width:250px;" />
+					<h:outputText value="Nationalité" />
+					<h:outputText value="الاسم" />
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.aprenomMissionnaire}"
+						style="width:250px;" />
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.prenomMissionnaire}"
+						style="width:250px;" />
+					<h:outputText value="Prénom missionnaire" />
+					<h:outputText value="اللقب " />
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.anomMissionnaire}"
+						style="width:250px;" />
+
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.nomMissionnaire}"
+						style="width:250px;" />
+					<h:outputText value="Nom missionnaire" />
+				</h:panelGrid>
+
+				<h:panelGrid columns="3" style="margin: auto;">
+					<h:outputText value=" تاريخ الولادة " />
+					<p:calendar
+						value="#{missionnaireManagedBean.missionnaire.dateNaisMissionnaire}"
+						style="width:515px; text-align:center;margin-left:48px;margin-right:10px;" />
+					<h:outputText value="Date de naissance" />
+				</h:panelGrid>
+				<h:panelGrid columns="4" style="margin: auto; text-align:center;">
+					<h:outputText value=" مكان الولادة" />
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.alieuNaisMissionnaire}"
+						style="width:250px;margin-left:1px" />
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.lieuNaisMissionnaire}"
+						style="width:250px;margin-left:38px;" />
+					<h:outputText value="Lieu de naissance" />
+				</h:panelGrid>
+				<h:panelGrid columns="3" style="margin: auto; margin-bottom:10px;">
+					<h:outputText value=" المعرف الوحيد  " />
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.matriculeMissionnaire}"
+						style="width:515px; text-align:center;margin-left:28px;margin-right:10px;" />
+					<h:outputText value="Matricule missionnaire" />
+
+					<h:outputText value="الهاتف" />
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.telephoneMissionnaire}"
+						style="width:515px; text-align:center;margin-left:28px;margin-right:10px;" required="true">
+						<f:validateRegex pattern="([0-9]+)"></f:validateRegex>
+						</p:inputText>
+					<h:outputText value="Télèphone" />
+
+					<h:outputText value="الخطة الوظيفية " />
+
+
+					<p:selectOneMenu
+						value="#{missionnaireManagedBean.fonction.codeFonction}"
+						style="width : 550px; ">
+						<f:selectItem itemLabel="" itemValue="" />
+
+						<f:selectItems value="#{missionnaireManagedBean.fonctions}"
+							var="f"
+							itemLabel="#{f.codeFonction} #{f.libelleFonction} #{f.alibelleFonction} #{f.respValidationFonc} #{f.arespValidationFonc}"
+							itemValue="#{f.codeFonction}" />
+
+					</p:selectOneMenu>
+
+					<h:outputText value="Fonction" />
+					<h:outputText value="الرتبة " />
+					<p:selectOneMenu value="#{missionnaireManagedBean.grade.codeGrade}"
+						style="width : 550px;">
+						<f:selectItem itemLabel="" itemValue="" />
+						<f:selectItems value="#{missionnaireManagedBean.grades}" var="g"
+							itemLabel="#{g.codeGrade} #{g.libelleGrade} #{g.alibelleGrade}"
+							itemValue="#{g.codeGrade}" />
+					</p:selectOneMenu>
+
+
+					<h:outputText value="Grade" />
+					<h:outputText value="المجموعة " />
+					<p:selectOneMenu
+						value="#{missionnaireManagedBean.groupe.codeGroupe}"
+						style="width : 550px;">
+						<f:selectItem itemLabel="" itemValue="" />
+
+						<f:selectItems value="#{missionnaireManagedBean.groupes}" var="gr"
+							itemLabel="#{gr.codeGroupe} #{gr.libelleGroupe} #{gr.alibelleGroupe} "
+							itemValue="#{gr.codeGroupe}" />
+					</p:selectOneMenu>
+					<h:outputText value="Groupe" />
+					<h:outputText value="الصنف " />
+
+					<p:selectOneMenu
+						value="#{missionnaireManagedBean.categorie.codeCategorie}"
+						style="width : 550px;">
+						<f:selectItem itemLabel="" itemValue="" />
+						<f:selectItems value="#{missionnaireManagedBean.categories}"
+							var="ca"
+							itemLabel="#{ca.codeCategorie} #{ca.libelleCategorie} #{ca.alibelleCategorie}"
+							itemValue="#{ca.codeCategorie}" />
+					</p:selectOneMenu>
+
+					<h:outputText value="Catégorie" />
+					<h:outputText value="مستوى التأجير " />
+					<p:inputText
+						value="#{missionnaireManagedBean.missionnaire.niveauSalaireMissionnaire}"
+						style="width:515px; text-align:center;margin-left:28px;margin-right:10px;" />
+					<h:outputText value="Niveau salaire" />
+				</h:panelGrid>
+				<p:commandButton value="تسجيل" id="withIcon" ajax="false"
+					action="#{missionnaireManagedBean.add()}" update="growl"
+					icon="ui-icon-disk" style="width:100px;margin-left: 113px;" />
+				<p:commandButton value="حذف المعلومات" id="withIcon1" update="form"
+					icon="ui-icon-disk" style="width:100px;margin-left: 113px;" />
+
+			</p:panel>
+		</h:form>
+	</ui:define>
+</ui:composition>
+

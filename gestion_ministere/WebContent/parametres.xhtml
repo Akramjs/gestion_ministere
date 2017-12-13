@@ -1,0 +1,55 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">تثبيت المجموعات </ui:define>
+	<ui:define name="corps">
+
+		<h:form>
+			<div align="center">
+				<h:panelGrid columns="1" cellspacing="20">
+					<p:commandButton style="font-size:150%;width:400px;"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/groupes.xhtml'"
+						image="ui-icon ui-icon-suitcase" value="تثبيت المجموعات " />
+					<p:commandButton style="font-size:150%;width:400px;"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/fonctions.xhtml'"
+						image="ui-icon ui-icon-gear" value="تثبيت الخطط الوظيفية " />
+					<p:commandButton style="font-size:150%;width:400px;"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/grades.xhtml'"
+						image="ui-icon ui-icon-signal" value="تثبيت الرتب " />
+					<p:commandButton style="font-size:150%;width:400px;"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/categorie.xhtml'"
+						image="ui-icon ui-icon-flag" value="تثبيت الأصناف " />
+					<p:commandButton style="font-size:150%;width:400px;"
+						rendered="#{loginManagedBean.connctedUser.profil.codeProfil == '000333'}"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/typeOrganisme.xhtml'"
+						image="ui-icon ui-icon-gear" value="تثبيت أنواع الهياكل " />
+					<p:commandButton style="font-size:150%;width:400px;"
+						rendered="#{loginManagedBean.connctedUser.profil.codeProfil != '000111'}"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/organismes.xhtml'"
+						image="ui-icon ui-icon-gear" value="تثبيت الهياكل " />
+					<p:commandButton style="font-size:150%;width:400px;"
+						image="ui-icon ui-icon-signal" value="إدخال المشاريع"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/projets.xhtml'" />
+					<p:commandButton style="font-size:150%;width:400px;"
+						rendered="#{loginManagedBean.connctedUser.profil.codeProfil == '000333'}"
+						image="ui-icon ui-icon-signal" value="تثبيت المناطق"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/zone.xhtml'" />
+					<p:commandButton style="font-size:150%;width:400px;"
+						rendered="#{loginManagedBean.connctedUser.profil.codeProfil == '000333'}"
+						image="ui-icon ui-icon-signal" value="تثبيت البلدان المقصودة"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/paysdestination.xhtml'" />
+<p:commandButton style="font-size:150%;width:400px;"
+						rendered="#{loginManagedBean.connctedUser.profil.codeProfil == '000333'}"
+						image="ui-icon ui-icon-signal" value="إدخال الملف الشخصي للمستعملين"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/utilisateurs.xhtml'" />
+
+				</h:panelGrid>
+			</div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

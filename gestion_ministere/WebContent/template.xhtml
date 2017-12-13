@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui">
+
+<f:view contentType="text/html" locale="ar">
+	<h:head>
+		<f:facet name="first">
+			<meta http-equiv="X-UA-Compatible" content="EmulateIE8" />
+			<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+		</f:facet>
+		<title><ui:insert name="titre" /></title>
+
+		<style type="text/css">
+.wijmo-wijmenu .wijmo-wijmenu-list .wijmo-wijmenu-item {
+	float: right;
+}
+
+.wijmo-wijmenu .wijmo-wijmenu-item .wijmo-wijmenu-text,.wijmo-wijmenu-horizontal .wijmo-wijmenu-parent .ui-icon,.wijmo-wijmenu-breadcrumb a,.wijmo-wijmenu-breadcrumb span,.wijmo-wijmenu-breadcrumb .wijmo-wijmenu-prev-list a .ui-icon
+	{
+	color: black;
+}
+
+.ui-widget {
+	font-size: 80%;
+}
+
+.ui-layout-north {
+	z-index: 20 !important;
+	overflow: visible !important;;
+}
+
+.ui-layout-north .ui-layout-unit-content {
+	overflow: visible !important;
+}
+
+.ui-state-default a,.ui-state-default a:link,.ui-state-default a:visited
+	{
+	color: #22222222;
+	text-decoration: none;
+}
+
+.basicStyle {
+	/*text-align: inherit; optinal*/
+	
+}
+
+.centerStyle {
+	text-align: center;
+}
+</style>
+	</h:head>
+
+
+	<h:body>
+		<p:layout fullPage="true">
+
+			<p:layoutUnit id="top" position="north" size="150">
+
+				<p:graphicImage url="images/banniere_finale.jpg" height="100"
+					style="width: 100%;" />
+
+				<h:form dir="rtl">
+					<p:menubar>
+						<p:menuitem style="color: black;" value="ألإستقبال"
+							icon="ui-icon ui-icon-home"
+							oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/accueil.xhtml'" />
+						<p:submenu label="الثوابت">
+							<p:menuitem style="color: black;" value="لتثبيت الخطط الوظيفية"
+								icon="ui-icon ui-icon-gear"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/fonctions.xhtml'" />
+							<p:menuitem style="color: black;" value="تثبيت الرتب"
+								icon="ui-icon ui-icon-signal"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/grades.xhtml'" />
+							<p:menuitem style="color: black;" value="تثبيت المجموعات"
+								icon="ui-icon ui-icon-suitcase"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/groupes.xhtml'" />
+							<p:menuitem style="color: black;" value="تثبيت الأصناف"
+								icon="ui-icon ui-icon-flag"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/categorie.xhtml'" />
+							<p:menuitem style="color: black;" value="تثبيت أنواع الهياكل"
+								icon="ui-icon ui-icon-siutcase"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/typeOrganisme.xhtml'" />
+							<p:menuitem style="color: black;" value="تثبيت الهياكل"
+								icon="ui-icon ui-icon-signal"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/grades.xhtml'" />
+							<p:menuitem style="color: black;" value="إدخال المشاريع"
+								icon="ui-icon ui-icon-gear"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/grades.xhtml'" />
+
+						</p:submenu>
+						<p:submenu label="الإعتمادات">
+							<p:menuitem style="color: black;"
+								value="إدخال الإعتمادات الأولية "
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/avoirBudOrg.xhtml'"
+								icon="ui-icon ui-icon-gear" />
+							<p:menuitem style="color: black;" value="إدخال إعتمادات المشاريع"
+								icon="ui-icon ui-icon-signal"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/avoirBudProj.xhtml'" />
+
+							<p:menuitem style="color: black;"
+								value="تحيـــين إعتمادات الأولية "
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/maj_budorganisme.xhtml'"
+								icon="ui-icon ui-icon-gear" />
+							<p:menuitem style="color: black;"
+								value="تحيـــين اعتمادات المشاريع" icon="ui-icon ui-icon-signal"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/maj_budprojet.xhtml'" />
+
+							<p:menuitem style="color: black;" value="المصادقة على الإعتمادات"
+								icon="ui-icon ui-icon-signal"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/validation_budget.xhtml'" />
+
+						</p:submenu>
+						<p:submenu label="إعداد المأموريات">
+							<p:menuitem style="color: black;"
+								value="إدخال المنتفعين بالمأمورية " icon="ui-icon ui-icon-gear"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/missionnaire.xhtml'" />
+							<p:menuitem style="color: black;"
+								value="إدخال المعطيات الخاصة بالمأمورية"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/missions.xhtml'" />
+							<p:menuitem style="color: black;" value="مصادقة الآمر بالصرف "
+								icon="ui-icon ui-icon-gear"
+								oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/missions.xhtml'" />
+						</p:submenu>
+						<p:menuitem style="color: black;" value="خروج"
+							actionListener="#{loginManagedBean.logout()}"
+							icon="ui-icon ui-icon-locked" />
+					</p:menubar>
+				</h:form>
+			</p:layoutUnit>
+
+			<p:layoutUnit id="bottom" position="south" size="35"
+				header="الحقوق محفوظة">
+
+			</p:layoutUnit>
+
+			<p:layoutUnit id="right" position="east" size="250"
+				collapsible="true" header="التاريخ">
+				<p:calendar mode="inline"></p:calendar>
+			</p:layoutUnit>
+			<p:layoutUnit position="center">
+
+				<ui:insert name="corps" />
+
+			</p:layoutUnit>
+
+		</p:layout>
+
+
+	</h:body>
+
+</f:view>
+</html>

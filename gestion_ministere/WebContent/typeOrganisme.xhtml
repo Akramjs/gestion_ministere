@@ -1,0 +1,86 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">تثبيت أنواع الهياكل</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic"
+			style="margin-bottom: 20px;
+margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+			<h2>
+				<h:outputText value="تثبيت أنواع الهياكل "
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Prise en charge des types des organismes "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+
+		<h:form dir="ltr" prependId="false">
+			<p:growl id="growl" />
+			<p:commandButton image="ui-icon ui-icon-plus" value="ajouter"
+				oncomplete="add.show();" />
+			<p />
+			<p:dataTable value="#{typeOrganismeManagedBean.listTypeOrganismes}"
+				var="f" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Code">
+					<h:outputText value="#{f.codeTypeOrganisme}" />
+				</p:column>
+				<p:column headerText="Code Clé">
+					<h:outputText value="#{f.codeCleTypeOrganisme}" />
+				</p:column>
+				<p:column headerText="Libelle">
+					<h:outputText value="#{f.libelleTypeOrganisme}" />
+				</p:column>
+				<p:column headerText="إسم نوع الهيكل">
+					<h:outputText value="#{f.alibelleTypeOrganisme}" />
+				</p:column>
+				<p:column style="width: 8%">
+					<p:commandLink immediate="true" title="editer" action="#{typeOrganismeManagedBean.goToEdit}">
+						<f:setPropertyActionListener
+							target="#{typeOrganismeManagedBean.selectedTypeOrganisme}"
+							value="#{f}" />
+						<p:graphicImage value="/images/document_edit.png" width="15"
+							height="15" />
+					</p:commandLink><p:spacer width="10px" height="0px" />
+					<p:commandLink immediate="true" title="Supprimer"
+						onclick="if(!confirm('Êtes-vous sûre de vouloire supprimer !')) return false;"
+						action="#{typeOrganismeManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{typeOrganismeManagedBean.selectedTypeOrganisme}"
+							value="#{f}" />
+						<p:graphicImage value="/images/remove.png" width="15" height="15" />
+					</p:commandLink>
+
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<h:form prependId="false">
+			<p:dialog widgetVar="add" header="نوع هيكل جديد">
+				<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="code" />
+					<p:inputText
+						value="#{typeOrganismeManagedBean.newTypeOrganisme.codeTypeOrganisme}" required="true" />
+					<h:outputLabel value="Code Clé" />
+					<p:inputText
+						value="#{typeOrganismeManagedBean.newTypeOrganisme.codeCleTypeOrganisme}" required="true" />
+					<h:outputLabel value="Libelle" />
+					<p:inputText
+						value="#{typeOrganismeManagedBean.newTypeOrganisme.libelleTypeOrganisme}" required="true"/>
+					<h:outputLabel value="إسم نوع الهيكل" />
+					<p:inputText
+						value="#{typeOrganismeManagedBean.newTypeOrganisme.alibelleTypeOrganisme}" required="true"/>
+					<p:commandButton value="enregistrer" update="pnl"
+						action="#{typeOrganismeManagedBean.add()}" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

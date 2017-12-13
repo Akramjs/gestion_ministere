@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="/template.xhtml">
+	<ui:define name="titre">تثبيت المناطق </ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic"
+			style="margin-bottom: 20px;margin-left: 332px;margin-right: 237px;text-align: center;">
+			<h2>
+				<h:outputText value="تحيين المناطق "
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Mise à jour des fonctions "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form>
+			<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="code" />
+					<p:inputText
+						value="#{zoneManagedBean.selectedZone.codeZone}" />
+					<h:outputLabel value="Zone" />
+					<p:inputText
+						value="#{zoneManagedBean.selectedZone.libelleZone}" />
+					<h:outputLabel value="المنطقة" />
+					<p:inputText
+						value="#{zoneManagedBean.selectedZone.alibelleZone}" />
+					
+					
+					<p:commandButton value="تسجيل" update="pnl growl"
+						actionListener="#{zoneManagedBean.update()}" />
+				</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

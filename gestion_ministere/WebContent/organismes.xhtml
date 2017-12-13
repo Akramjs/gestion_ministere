@@ -1,0 +1,95 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">تثبيت الهياكل</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic"
+			style="margin-bottom: 20px;
+margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+			<h2>
+				<h:outputText value="تثبيت الهياكل "
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Prise en charge des organismes "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form dir="rtl">
+
+			<h:panelGrid columns="3" id="pnl"
+				styleClass="centerStyle, centerStyle, centerStyle">
+				<h:outputLabel value="" />
+				<h:panelGroup id="codePanel">
+					<h:outputLabel style="font-weight : bold;" value="رمز الهياكل" />
+					<p:inputText readonly="true" size="40"
+						value="#{organismeManagedBean.newOrganisme.codeOrg}" />
+					<h:outputLabel style="font-weight : bold;" value="Code organisme" />
+				</h:panelGroup>
+				<h:outputLabel value="" />
+				<h:outputLabel style="font-weight : bold;" value="نوعية الهياكل" />
+				<p:selectOneMenu
+					value="#{organismeManagedBean.newOrganisme.typeOrganisme.codeTypeOrganisme}">
+					<f:selectItems
+						value="#{typeOrganismeManagedBean.listTypeOrganismes}" var="p"
+						itemLabel="#{p.libelleTypeOrganisme} #{p.alibelleTypeOrganisme} #{p.codeTypeOrganisme}"
+						itemValue="#{p.codeTypeOrganisme}" />
+				</p:selectOneMenu>
+				<h:outputLabel style="font-weight : bold;" value="Type organisme" />
+				<h:outputLabel style="font-weight : bold;" value="" />
+				<p:inputText value="#{organismeManagedBean.newOrganisme.libelleOrg}"
+					size="40" />
+				<h:outputLabel style="font-weight : bold;" value="Libelle organisme" />
+				<h:outputLabel style="font-weight : bold;" value="إسم الهيكل" />
+				<p:inputText
+					value="#{organismeManagedBean.newOrganisme.alibelleOrg}" size="40"
+					id="lo" required="true">
+					<f:validateLength maximum="10" minimum="1" />
+					<f:validateRegex pattern="([a-zA-Z]+)" for="lo" />
+				</p:inputText>
+				<h:outputLabel style="font-weight : bold;" value="" />
+				<h:outputLabel style="font-weight : bold;"
+					value="إسم الهيكل المختصر" />
+				<p:inputText value="#{organismeManagedBean.newOrganisme.abreLibOrg}"
+					size="40" required="true">
+					<f:validateLength maximum="10" minimum="1" />
+				</p:inputText>
+				<h:outputLabel style="font-weight : bold;"
+					value="Abréviation libelle Organisme" />
+				<h:outputLabel style="font-weight : bold;" value="" />
+				<p:inputText value="#{organismeManagedBean.newOrganisme.respOrg}"
+					size="40" />
+				<h:outputLabel style="font-weight : bold;"
+					value="Responsable organisme" />
+				<h:outputLabel style="font-weight : bold;" value="مسؤول الهيكل" />
+				<p:inputText value="#{organismeManagedBean.newOrganisme.arespOrg}"
+					size="40" />
+				<h:outputLabel style="font-weight : bold;" value="" />
+				<h:outputLabel style="font-weight : bold;" value="" />
+				<p:inputText value="#{organismeManagedBean.newOrganisme.adresseOrg}"
+					size="40" />
+				<h:outputLabel style="font-weight : bold;" value="Adresse organisme" />
+				<h:outputLabel style="font-weight : bold;" value="عنوان الهيكل" />
+				<p:inputText
+					value="#{organismeManagedBean.newOrganisme.aadresseOrg}" size="40" />
+				<h:outputLabel style="font-weight : bold;" value="" />
+				<h:outputLabel style="font-weight : bold;" value="" />
+				<h:panelGroup>
+					<p:commandButton value="enregistrer" update="codePanel"
+						actionListener="#{organismeManagedBean.add()}" />
+					<p:commandButton value="initialiser" update="codePanel"
+						actionListener="#{organismeManagedBean.reinit()}" />
+				</h:panelGroup>
+				<h:outputLabel style="font-weight : bold;" value="" />
+			</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

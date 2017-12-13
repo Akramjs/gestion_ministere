@@ -1,0 +1,138 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">تحيين إعتمادات المأموريات و النقل</ui:define>
+	<ui:define name="corps">
+		<style>
+.noussa td {
+	float: right;
+}
+
+.noussa tr {
+	margin-top: 20px;
+	display: flex;
+}
+</style>
+
+
+		<h:form style="text-align: center;" dir="RTL" prependId="false">
+			<p:growl id="growl" life="2000" />
+
+			<p:panel id="basic"
+				style="margin-bottom: 20px; margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+				<h2>
+					<h:outputText value="تحيين إعتمادات المأموريات و النقل"
+						style="color:rgba(17, 164, 189, 1);" />
+					<br></br>
+					<h:outputText
+						value="Mise à jour des budgets des mission et transport "
+						style="color: rgba(17, 164, 189, 1);text-align:center;" />
+				</h2>
+			</p:panel>
+
+			<p:panel id="basic1" style="overflow: hidden;">
+				<h:panelGrid style="margin: auto; text-align:center;" columns="3"
+					class="noussa">
+
+					<h:outputText value="التاريخ" />
+					<p:calendar value="#{majBudProjManagedBean.curDate}" />
+					<h:outputText value="Date" />
+				</h:panelGrid>
+				<h:panelGrid style="margin: auto; text-align:center;" columns="4">
+					<h:outputText value="إسم الهيكل" />
+					<h:outputText value="Organisme" />
+					<h:outputText value="رمز الهيكل" />
+					<h:outputText value="" />
+					<p:inputText
+						value="#{majBudOrgManagedBean.selectedOrganisme.alibelleOrg}" />
+					<p:inputText
+						value="#{majBudOrgManagedBean.selectedOrganisme.libelleOrg}" />
+					<p:inputText
+						value="#{majBudOrgManagedBean.selectedOrganisme.codeOrg}" />
+					<p:commandButton value="..." oncomplete="show.show()" />
+				</h:panelGrid>
+				<h:panelGrid style="margin: auto; text-align:center;" columns="3"
+					class="noussa">
+					<h:outputText value="مبلغ تحيين إعتمادات اللمأموريات" />
+					<h:panelGroup>
+						<p:commandButton image="ui-icon ui-icon-minus"
+							action="#{majBudOrgManagedBean.removeMnt()}" />
+						<p:commandButton image="ui-icon ui-icon-plus"
+							action="#{majBudOrgManagedBean.addMnt()}" />
+						<p:inputText value="#{majBudOrgManagedBean.majsum}" />
+					</h:panelGroup>
+					<h:outputText value="Montant mise à jour des budgets missions" />
+				</h:panelGrid>
+				<h:panelGrid style="margin: auto; text-align:center;" columns="3"
+					class="noussa">
+					<h:outputText value="مبلغ تحيين إعتمادات النقل" />
+					<h:panelGroup>
+						<p:commandButton image="ui-icon ui-icon-minus"
+							action="#{majBudOrgManagedBean.removeMntT()}" />
+						<p:commandButton image="ui-icon ui-icon-plus"
+							action="#{majBudOrgManagedBean.removeMntT()}" />
+						<p:inputText value="#{majBudOrgManagedBean.majsumT}" />
+					</h:panelGroup>
+					<h:outputText value="Montant mise à jour de budgets transport" />
+				</h:panelGrid>
+				<h:panelGrid style="margin: auto; text-align:center;" columns="3">
+					<h:outputText value="" />
+					<p:inputText
+						value="#{majBudOrgManagedBean.selectedOrganisme.respOrg}" />
+					<h:outputText value="Référence" />
+
+					<h:outputText value="المرجع" />
+					<p:inputText
+						value="#{majBudOrgManagedBean.selectedOrganisme.arespOrg}" />
+					<h:outputText value="" />
+				</h:panelGrid>
+
+				<h:panelGrid id="mntPnl" style="margin: auto; text-align:center;"
+					columns="3">
+					<h:outputText value="المجموع الجديد لاعتمادات المأموريات" />
+					<p:inputText value="#{majBudOrgManagedBean.newsum}" />
+					<h:outputText value="Somme mise à jour des budgets des missions" />
+
+					<h:outputText value="المجموع الجديد لاعتمادات النقل" />
+					<p:inputText value="#{majBudOrgManagedBean.newsumT}" />
+					<h:outputText value="Montant mise à jour des budgets transport" />
+				</h:panelGrid>
+					 <p:commandButton value="تسجيل" id="withIcon"
+					actionListener="#{majBudOrgManagedBean.save()}" update="growl"
+					icon="ui-icon-disk"
+					style="width:200px;margin: 17px 0px 0px 26px;height: 40px;
+float: left;" />
+
+			</p:panel>
+		</h:form>
+
+		<h:form prependId="false">
+			<p:dialog widgetVar="show" header="المشاريع" width="400" height="300">
+				<p:dataTable value="#{majBudOrgManagedBean.listOrganismes}" var="pr"
+					paginator="true" paginatorPosition="bottom" rows="5">
+					<p:column headerText="Code Organisme">
+						<h:outputText value="#{pr.codeOrg}" />
+					</p:column>
+					<p:column headerText="Nom Organisme">
+						<h:outputText value="#{pr.libelleOrg}" />
+					</p:column>
+					<p:column headerText="إسم المشروع">
+						<h:outputText value="#{pr.alibelleOrg}" />
+					</p:column>
+					<p:column headerText="action">
+						<p:commandButton value="afficher" ajax="false"
+							action="#{majBudOrgManagedBean.refresh()}">
+							<f:setPropertyActionListener
+								target="#{majBudOrgManagedBean.selectedOrganisme}" value="#{pr}"></f:setPropertyActionListener>
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</p:dialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

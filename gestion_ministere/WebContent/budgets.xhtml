@@ -1,0 +1,35 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">الإعتمادات</ui:define>
+	<ui:define name="corps">
+
+		<h:form>
+			<div align="center">
+				<h:panelGrid columns="1" cellspacing="20">
+					<p:commandButton style="font-size:200%;width:400px;"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/avoirBudOrg.xhtml'"
+						image="ui-icon ui-icon-gear"
+						value="إدخال الإعتمادات الأولية السانوية" />
+					<p:commandButton style="font-size:200%;width:400px;"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/avoirBudProj.xhtml'"
+						image="ui-icon ui-icon-gear" value="إدخال إعتمادات المشاريع" />
+					<p:commandButton style="font-size:200%;width:400px;"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/maj_budorganisme.xhtml'"
+						image="ui-icon ui-icon-gear" value="تحيـــين إعتمادات الأولية " />
+					<p:commandButton style="font-size:200%;width:400px;"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/maj_budprojet.xhtml'"
+						image="ui-icon ui-icon-gear" value="تحيـــين اعتمادات المشاريع" />
+						<p:commandButton style="font-size:200%;width:400px;"
+						oncomplete="document.location.href='#{facesContext.externalContext.requestContextPath}/validation_budget.xhtml'"
+						image="ui-icon ui-icon-gear" value="المصادقة على الإعتمادات" />
+				</h:panelGrid>
+			</div>
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

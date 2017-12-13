@@ -1,0 +1,85 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">إدخال المشاريع</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic"
+			style="margin-bottom: 20px;
+margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+			<h2>
+				<h:outputText value="إدخال المشاريع"
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Prise en charge des projets "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+
+		<h:form dir="ltr">
+			<p:commandButton image="ui-icon ui-icon-plus" value="ajouter"
+				oncomplete="add.show();" />
+			<p />
+			<p:dataTable value="#{projetManagedBean.listProjets}" var="f"
+				rows="5" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Projet">
+					<h:outputText value="#{f.nomProj}" />
+				</p:column>
+				<p:column headerText="المشروع">
+					<h:outputText value="#{f.anomProj}" />
+				</p:column>
+				<p:column headerText="الرمز">
+					<h:outputText value="#{f.codeProj}" />
+				</p:column>
+				<p:column style="width: 8%">
+				<p:commandLink immediate="true" title="edit"
+					action="#{projetManagedBean.goToEdit()}"	>
+						<f:setPropertyActionListener
+							target="#{projetManagedBean.selectedProjet}" value="#{f}" />
+						<p:graphicImage value="/images/document_edit.png" width="15"
+							height="15" />
+					</p:commandLink><p:spacer width="15px" height="0px"/>
+					<p:commandLink immediate="true" title="delete"
+						onclick="if(!confirm('Êtes-vous sûre de vouloire supprimer !')) return false;"
+						action="#{projetManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{projetManagedBean.selectedProjet}" value="#{f}" />
+						<p:graphicImage value="/images/remove.png" width="15"
+							height="15" />
+					</p:commandLink>
+					
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<h:form>
+			<p:dialog widgetVar="add" header="ادخال مشروع" width="500"
+				height="350">
+				<h:panelGrid columns="2" id="pnl" cellspacing="15">
+					<h:outputLabel value="الرمز" />
+					<p:inputText value="#{projetManagedBean.newProjet.codeProj}" />
+					<h:outputLabel value="المشروع" />
+					<p:inputText value="#{projetManagedBean.newProjet.anomProj}" />
+					<h:outputLabel value="Projet" />
+					<p:inputText value="#{projetManagedBean.newProjet.nomProj}" />
+					<h:outputLabel value="Organisme" />
+					<p:selectOneMenu
+						value="#{projetManagedBean.newProjet.organisme.codeOrg}">
+						<f:selectItems
+							value="#{typeOrganismeManagedBean.listTypeOrganismes}" var="p"
+							itemLabel="#{p.libelleTypeOrganisme} #{p.alibelleTypeOrganisme} #{p.codeTypeOrganisme}"
+							itemValue="#{p.codeTypeOrganisme}" />
+					</p:selectOneMenu>
+					<p:commandButton value="enregistrer" update="growl"
+						action="#{projetManagedBean.add()}" ajax="false" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

@@ -1,0 +1,147 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">أدخل الاعتمادات الأولية السنوية</ui:define>
+	<ui:define name="corps">
+
+		<p:growl id="growl" />
+		<h:form dir="ltr">
+			<div align="center" dir="rtl">
+				<h:panelGrid columns="6" id="pnl" cellspacing="15">
+					<h:outputLabel value="الهيكل" />
+					<p:selectOneMenu required="true"
+						requiredMessage="Organisme obligatoire"
+						value="#{avoirBudOrgManagedBean.newAvoirBudorg.organisme.codeOrg}"
+						style="width : 180px; ">
+						<f:selectItem itemLabel="--Choose ---" itemValue="" />
+
+						<f:selectItems value="#{avoirBudOrgManagedBean.listOrganismes}"
+							var="f" itemLabel="#{f.codeOrg} #{f.libelleOrg} #{f.alibelleOrg}"
+							itemValue="#{f.codeOrg}" />
+
+					</p:selectOneMenu>
+					<h:outputLabel value="Organisme" />
+					<h:outputLabel value="" />
+					<h:outputLabel value="" />
+					<h:outputLabel value="" />
+					<h:outputLabel value="  السنة " />
+					<p:selectOneMenu required="true"
+						requiredMessage="Année obligatoire"
+						value="#{avoirBudOrgManagedBean.newAvoirBudorg.id.annee}"
+						style="width : 180px; ">
+						<f:selectItem itemLabel="" itemValue="" />
+
+						<f:selectItems value="#{avoirBudOrgManagedBean.listAnnees}"
+							var="f" itemLabel="#{f.anneeS}" itemValue="#{f.annee}" />
+
+					</p:selectOneMenu>
+					<h:outputLabel value="Annee" />
+					<h:outputLabel value="" />
+					<h:outputLabel value="" />
+					<h:outputLabel value="" />
+					<h:outputLabel value="المرجع" />
+					<p:inputText
+						value="#{avoirBudOrgManagedBean.newAvoirBudorg.arefValBudTrans}" />
+					<p:inputText
+						value="#{avoirBudOrgManagedBean.newAvoirBudorg.refValBudTrans}" />
+					<h:outputLabel value="Réf. budget des transport" />
+					<p:inputText
+						value="#{avoirBudOrgManagedBean.newAvoirBudorg.valBudTrans}" required="true" requiredMessage="budget des transport obligatoire" />
+					<h:outputLabel value="Budgets de transport" />
+					<h:outputLabel value="المرجع" />
+					<p:inputText
+						value="#{avoirBudOrgManagedBean.newAvoirBudorg.arefValBudMis}" />
+					<p:inputText
+						value="#{avoirBudOrgManagedBean.newAvoirBudorg.refValBudMis}" />
+					<h:outputLabel value="Réf. budget des missions" />
+					<p:inputText
+						value="#{avoirBudOrgManagedBean.newAvoirBudorg.valBudMis}" required="true" requiredMessage="budget mission obligatoire" />
+					<h:outputLabel value="Budgets des missions" />
+				</h:panelGrid>
+				<p />
+				<p:commandButton image="ui-icon ui-icon-disk" value="enregistrer"
+					update="pnl growl" actionListener="#{avoirBudOrgManagedBean.add()}" />
+			</div>
+			<p />
+			<p:dataTable value="#{avoirBudOrgManagedBean.listAvoirBudorgs}"
+				var="f" rows="5" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Num Ordre">
+					<h:outputText value="#{f.id.numeroOrdreBudOrg}" />
+				</p:column>
+				<p:column headerText="Budgets des missions">
+					<h:outputText value="#{f.valBudMis}" />
+				</p:column>
+				<p:column headerText="Réf. Budgets missions">
+					<h:outputText value="#{f.refValBudMis}" />
+				</p:column>
+				<p:column headerText="المرجع">
+					<h:outputText value="#{f.arefValBudMis}" />
+				</p:column>
+				<p:column headerText="Budgets transp.">
+					<h:outputText value="#{f.valBudTrans}" />
+				</p:column>
+				<p:column headerText="Réf. Budgets transp.">
+					<h:outputText value="#{f.refValBudTrans}" />
+				</p:column>
+				<p:column headerText="المرجع">
+					<h:outputText value="#{f.arefValBudTrans}" />
+				</p:column>
+				<p:column style="width: 8%">
+				<p:commandLink immediate="true" title="edit"
+					action="#{avoirBudOrgManagedBean.goToEdit()}"	>
+						<f:setPropertyActionListener
+							target="#{avoirBudOrgManagedBean.selectedAvoirBudorg}"
+							value="#{f}" />
+						<p:graphicImage value="/images/document_edit.png" width="15"
+							height="15" />
+					</p:commandLink><p:spacer width="15px" height="0px"/>
+					<p:commandLink immediate="true" title="delete"
+						onclick="if(!confirm('Êtes-vous sûre de vouloire supprimer !')) return false;"
+						action="#{avoirBudOrgManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{avoirBudOrgManagedBean.selectedAvoirBudorg}"
+							value="#{f}" />
+						<p:graphicImage value="/images/remove.png" width="15"
+							height="15" />
+					</p:commandLink>
+					
+				</p:column>
+				
+			</p:dataTable>
+			<div align="center" style="margin-top: 60px; font-weight: bold;">
+				<h:panelGrid columns="3">
+					<h:outputLabel value="Somme des budgets des missions" />
+					<p:inputText value="#{avoirBudOrgManagedBean.sumMission}" />
+					<h:outputLabel value="مجموع اعتمادات المأموريات" />
+					<h:outputLabel value="Somme des budgets de Transport" />
+					<p:inputText value="#{avoirBudOrgManagedBean.sumTransport}" />
+					<h:outputLabel value="مجموع اعتمادات النقل" />
+				</h:panelGrid>
+
+			</div>
+		</h:form>
+		<h:form prependId="false">
+			<p:dialog widgetVar="add" header="اعتمادات جديدة">
+				<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="code Org." />
+					<p:inputText
+						value="#{avoirBudOrgManagedBean.newAvoirBudorg.id.codeOrg}" />
+					<h:outputLabel value="Organisme" />
+					<p:inputText
+						value="#{avoirBudOrgManagedBean.newAvoirBudorg.organisme.libelleOrg}" />
+					<h:outputLabel value="Annee" />
+					<p:inputText
+						value="#{avoirBudOrgManagedBean.newAvoirBudorg.id.annee}" />
+					<p:commandButton value="enregistrer" update="pnl growl"
+						actionListener="#{categorieManagedBean.add()}" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

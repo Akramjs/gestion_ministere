@@ -1,0 +1,53 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="/template.xhtml">
+	<ui:define name="titre">تحيين البلدان</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic"
+			style="margin-bottom: 20px;margin-left: 332px;margin-right: 237px;text-align: center;">
+			<h2>
+				<h:outputText value="تحيين البلدان "
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Mise à jour des Pays "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form>
+			<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="zone" />
+					<p:selectOneMenu
+							value="#{paysDestinationManagedBean.zone.codeZone}"
+							style="width : 250px;">
+														<f:selectItem itemLabel="" itemValue=""/>
+							
+							<f:selectItems value="#{paysDestinationManagedBean.zones}" var="z"
+								itemLabel="#{z.codeZone} #{z.libelleZone} #{z.alibelleZone}"
+								itemValue="#{z.codeZone}" />
+								</p:selectOneMenu>
+					<h:outputLabel value="code" />
+					<p:inputText
+						value="#{paysDestinationManagedBean.selectedPaysDestination.codePaysDes}" />
+					<h:outputLabel value="Pays" />
+					<p:inputText
+						value="#{paysDestinationManagedBean.selectedPaysDestination.libellePaysDes}" />
+					<h:outputLabel value="البلد" />
+					<p:inputText
+						value="#{paysDestinationManagedBean.selectedPaysDestination.alibellePaysDes}" />
+					<h:outputLabel value="langue" />
+					<p:inputText
+						value="#{paysDestinationManagedBean.selectedPaysDestination.langue}" />
+
+					<p:commandButton value="ØªØ³Ø¬ÙŠÙ„" update="pnl growl"
+						actionListener="#{paysDestinationManagedBean.update()}" />
+				</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

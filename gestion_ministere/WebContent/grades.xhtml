@@ -1,0 +1,85 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">تثبيت الرتب</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic" style="margin-bottom: 20px; margin-left: 332px; margin-right: 237px;text-align: center;">
+			<h2>
+				<h:outputText value="تثبيت الرتب "
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Prise en charge des grades "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form dir="ltr">
+			<p:commandButton image="ui-icon ui-icon-plus" value="ajouter"
+				oncomplete="add.show();" />
+			<p />
+			<p:dataTable value="#{gradeManagedBean.listGrades}" var="f" rows="5"
+				paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Code">
+					<h:outputText value="#{f.codeGrade}" />
+				</p:column>
+				<p:column headerText="Grade">
+					<h:outputText value="#{f.libelleGrade}" />
+				</p:column>
+				<p:column headerText="الرتبة">
+					<h:outputText value="#{f.alibelleGrade}" />
+				</p:column>
+				<p:column style="width: 8%">
+					<p:commandLink action="#{gradeManagedBean.goToEdit()}"
+						immediate="true" title="edit">
+						<f:setPropertyActionListener
+							target="#{gradeManagedBean.selectedGrade}" value="#{f}" />
+						<p:graphicImage value="/images/document_edit.png" width="15"
+							height="15" />
+					</p:commandLink>
+					<p:spacer width="10px" height="0ox" />
+					<p:commandLink immediate="true" title="delete"
+						onclick="if(!confirm('Êtes-vous sûre de vouloire supprimer !')) return false;"
+						action="#{gradeManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{gradeManagedBean.selectedGrade}" value="#{f}" />
+						<p:graphicImage value="/images/remove.png" width="15" height="15" />
+					</p:commandLink>
+
+				</p:column>
+
+			</p:dataTable>
+		</h:form>
+		<h:form>
+			<p:dialog widgetVar="add" header="خطة وظيفية جديدة">
+				<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="code" />
+					<p:inputText value="#{gradeManagedBean.newGrade.codeGrade}"
+						required="true" requiredMessage="code obligatoire" id="code">
+						<f:validateLength minimum="1" />
+						<f:validateRegex pattern="([0-9]+)" for="code" />
+					</p:inputText>
+					<h:outputLabel value="Grade" />
+					<p:inputText value="#{gradeManagedBean.newGrade.libelleGrade}"
+						id="gra" required="true" requiredMessage="Grade obligatoire">
+						<f:validateLength maximum="25" minimum="1" />
+						<f:validateRegex pattern="([a-zA-Z]+)" for="gra" />
+					</p:inputText>
+					<h:outputLabel value="الرتبة" />
+					<p:inputText value="#{gradeManagedBean.newGrade.alibelleGrade}"
+						required="true" requiredMessage="الرتبة obligatoire">
+
+					</p:inputText>
+
+					<p:commandButton value="enregistrer" update="pnl growl"
+						actionListener="#{gradeManagedBean.update()}" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="/template.xhtml">
+	<ui:define name="titre">تثبيت المشاريع </ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic"
+			style="margin-bottom: 20px;margin-left: 332px;margin-right: 237px;text-align: center;">
+			<h2>
+				<h:outputText value="تحيين المشاريع "
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Mise à jour des projets "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form>
+			<h:panelGrid columns="2" id="pnl" cellspacing="15">
+					<h:outputLabel value="الرمز" />
+					<p:inputText value="#{projetManagedBean.selectedProjet.codeProj}" />
+					<h:outputLabel value="المشروع" />
+					<p:inputText value="#{projetManagedBean.selectedProjet.anomProj}" />
+					<h:outputLabel value="Projet" />
+					<p:inputText value="#{projetManagedBean.selectedProjet.nomProj}" />
+					<h:outputLabel value="Organisme" />
+					<p:selectOneMenu
+						value="#{projetManagedBean.selectedProjet.organisme.codeOrg}">
+						<f:selectItems
+							value="#{typeOrganismeManagedBean.listTypeOrganismes}" var="p"
+							itemLabel="#{p.libelleTypeOrganisme} #{p.alibelleTypeOrganisme} #{p.codeTypeOrganisme}"
+							itemValue="#{p.codeTypeOrganisme}" />
+					</p:selectOneMenu>
+					<p:commandButton value="enregistrer" update="growl"
+						action="#{projetManagedBean.update()}" ajax="false" />
+				</h:panelGrid>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+

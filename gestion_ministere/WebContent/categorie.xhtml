@@ -1,0 +1,86 @@
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui" template="template.xhtml">
+	<ui:define name="titre">تثبيت الأصناف</ui:define>
+	<ui:define name="corps">
+		<p:panel id="basic"
+			style="margin-bottom: 20px;
+margin-left: 332px;
+margin-right: 237px;text-align: center;">
+
+			<h2>
+				<h:outputText value="تثبيت الأصناف"
+					style="color:rgba(17, 164, 189, 1);" />
+				<br></br>
+				<h:outputText value="Prise en charge des catégorie "
+					style="color: rgba(17, 164, 189, 1);text-align:center;" />
+			</h2>
+		</p:panel>
+		<p:growl id="growl" />
+		<h:form dir="ltr">
+			<p:commandButton image="ui-icon ui-icon-plus" value="ajouter"
+				oncomplete="add.show();" />
+			<p />
+			<p:dataTable value="#{categorieManagedBean.listCategories}" var="f"
+				rows="5" paginator="true" paginatorPosition="bottom">
+				<p:column headerText="Code">
+					<h:outputText value="#{f.codeCategorie}" />
+				</p:column>
+				<p:column headerText="Categorie">
+					<h:outputText value="#{f.libelleCategorie}" />
+				</p:column>
+				<p:column headerText="الصنف">
+					<h:outputText value="#{f.alibelleCategorie}" />
+				</p:column>
+								
+				<p:column style="width: 8%">
+					<p:commandLink immediate="true" title="editer" action="#{categorieManagedBean.goToEdit()}">
+						<f:setPropertyActionListener
+							target="#{categorieManagedBean.selectedCategorie}" value="#{f}" />
+						<p:graphicImage value="/images/document_edit.png" width="15"
+							height="15" />
+					</p:commandLink><p:spacer width="10px" height="0px" />
+					<p:commandLink immediate="true" title="Supprimer"
+						onclick="if(!confirm('Êtes-vous sûre de vouloire supprimer !')) return false;"
+						action="#{categorieManagedBean.delete()}">
+						<f:setPropertyActionListener
+							target="#{categorieManagedBean.selectedCategorie}" value="#{f}" />
+						<p:graphicImage value="/images/remove.png" width="15" height="15" />
+					</p:commandLink>
+
+				</p:column>
+			</p:dataTable>
+		</h:form>
+		<h:form prependId="false">
+			<p:dialog widgetVar="add" header="صنف جديد">
+				<h:panelGrid columns="2" id="pnl">
+					<h:outputLabel value="code" />
+					<p:inputText required="true" requiredMessage="saisie de code obligatoire" id="code"
+						value="#{categorieManagedBean.newCategorie.codeCategorie}">
+												<f:validateLength maximum="2" minimum="1" />
+												<f:validateRegex pattern="([0-9A-Z]+)" for="code" />
+						</p:inputText>
+					<h:outputLabel value="Categorie" />
+					<p:inputText required="true" value="#{categorieManagedBean.newCategorie.libelleCategorie}" requiredMessage=" Champ catégorie obligatoire" id="ca">		
+									<f:validateLength maximum="10" minimum="1" />
+																					<f:validateRegex pattern="([a-zA-Z]+)" for="ca" />
+									
+									</p:inputText>
+					<h:outputLabel value="الصنف" />
+					<p:inputText required="true" requiredMessage="الصنف إجباري"
+						value="#{categorieManagedBean.newCategorie.libelleCategorie}"  >
+															<f:validateLength maximum="10" minimum="1" />
+						</p:inputText>
+					<p:commandButton value="enregistrer" update="pnl growl"
+						actionListener="#{categorieManagedBean.add()}" />
+				</h:panelGrid>
+			</p:dialog>
+
+		</h:form>
+
+	</ui:define>
+</ui:composition>
+
